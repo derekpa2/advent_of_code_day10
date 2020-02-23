@@ -14,6 +14,7 @@ class Settings:
     def run(self):
         # this is the main menu
         click = False
+        game_clock = pygame.time.Clock()
 
         while True:
 
@@ -57,6 +58,8 @@ class Settings:
                     if event.button:
                         click = True
             pygame.display.update()
+
+            game_clock.tick(constants.FPS)
 
     def draw_button_set(self, button_name_list):
 

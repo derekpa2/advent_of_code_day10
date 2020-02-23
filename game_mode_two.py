@@ -44,6 +44,7 @@ class GameModeTwo:
         click = False
         paused = False
         paused_string = 'Pause'
+        game_clock = pygame.time.Clock()
 
         # mode two game loop
         while True:
@@ -116,6 +117,8 @@ class GameModeTwo:
                         click = True
             pygame.display.update()
 
+            game_clock.tick(constants.FPS)
+
     def find_state(self):
 
         self.found_counter = 0
@@ -131,14 +134,13 @@ class GameModeTwo:
             self.min_distance_asteroid = utilityfunctions.calculate_min_distance(self.monitoring_station,
                                                                                  self.asteroid_dictionary[key])
             self.current_angle = 270 - utilityfunctions.radians_to_degrees(key)
-            print(key, self.current_angle)
             self.asteroid_list.remove(self.min_distance_asteroid)
             self.asteroid_dictionary[key].remove(self.min_distance_asteroid)
             self.asteroid_grid[self.min_distance_asteroid[1]][self.min_distance_asteroid[0]] = '*'
             self.state = 'found'
 
     def found_state(self):
-        if self.found_counter >= 1:
+        if self.found_counter >= 60:
             self.asteroid_grid[self.min_distance_asteroid[1]][self.min_distance_asteroid[0]] = ' '
             self.state = 'find'
         self.found_counter += 1

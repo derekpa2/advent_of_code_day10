@@ -36,6 +36,7 @@ class Game:
         # this is the main menu
         click = False
         value = ''
+        game_clock = pygame.time.Clock()
 
         while True:
 
@@ -80,6 +81,10 @@ class Game:
                         click = True
             if value != 'restart':
                 pygame.display.update()
+
+            game_clock.tick(constants.FPS)
+
+            # print(game_clock.get_fps())
 
     def run_mode_two(self):
         mode_two = game_mode_two.GameModeTwo(self.DISPLAY, self.asteroid_grid, self.asteroid_list, self.images)
